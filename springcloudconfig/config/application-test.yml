@@ -88,4 +88,4 @@ eureka:
     register-with-eureka: true
     registry-fetch-interval-seconds: 30
     serviceUrl: #注册中心的注册地址
-      defaultZone: http://admin:admin@localhost:8761/eureka/
+#      defaultZone: http://admin:admin@localhost:8761/eureka/      
