@@ -1,0 +1,46 @@
+server:
+  port: 8761  #服务注册中心端口号
+
+spring:
+  application:
+    name: hello-register
+  security:
+#    basic:
+#      #关闭安全验证
+#      enabled: false
+    user:
+      name: admin
+      password: admin
+
+eureka:
+  #此处设置会改变eureka控制台的显示
+  datacenter: cloud
+  #此处设置会改变eureka控制台的显示
+  environment: dev
+  dashboard:
+    #控制台路径
+    path: /dashboard  #访问eureka时，加上这个后缀
+    #是否启用控制台
+    enabled: true
+  instance:
+    prefer-ip-address: true #以IP地址注册到服务中心，相互注册使用IP地址
+#    instance-id:  ${spring.cloud.client.ipAddress}:${server.port} #实例规则是 ip+端口号
+    hostname: localhost #服务注册中心IP地址
+    appname: 注册中心
+  client:
+    register-with-eureka: false #是否向服务注册中心注册自己
+    fetch-registry: false #不从Eureka注册中心获取服务的注册信息
+    service-url: #服务注册中心的配置内容，指定服务注册中心的位置
+      defaultZone:  http://${eureka.instance.hostname}:${server.port}/eureka/ #后面的/eureka是固定后缀，访问eureka时，需要删除该后缀
+  server:
+    eviction-interval-timer-in-ms: 3000  #指定EvictionTask定时任务的调度频率，用于剔除过期的实例
+#    enable-self-preservation: false  #是否开启自我保护模式（开启状态下服务停掉eureka不会立即清除掉宕掉的服务，所以false）
+    renewal-percent-threshold: 0.49 #定义了renews 和renews threshold的比值，默认值为0.85。当server在15分钟内，比值低于percent，即少了15%的微服务心跳，server会进入自我保护状态
+#    response-cache-update-interval-ms: 3000  #设置CacheUpdateTask的调度时间间隔，用于从readWriteCacheMap更新数据到readOnlyCacheMap，仅仅在eureka.server.use-read-only-response-cache为true的时候才生效
+#    expected-number-of-renews-per-min:  1 #指定每分钟需要收到的续约次数值，实际该值在其中被写死为count*2，另外也会被更新(已过时)
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

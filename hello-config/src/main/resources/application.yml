@@ -1,0 +1,27 @@
+server:
+  port: 3301
+spring:
+  application:
+    name: hello-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/allovesky520/hello-service # git仓库的地址
+          search-paths: springcloudconfig/config  # git仓库地址下的相对地址，可以配置多个，用,分割。
+          username: #Git仓库用户名
+          password: #Git仓库密码
+
+# 更改Eureka更新频率将打破服务器的自我保护功能，生产环境下不建议自定义这些配置。
+eureka:
+  instance:
+    prefer-ip-address: true #使⽤ip注册，否则会使⽤主机名注册了（此处考虑到对⽼版本的兼容，新版本经过实验都是ip）
+    lease-expiration-duration-in-seconds: 90  # 续约到期时间（默认90秒）
+    lease-renewal-interval-in-seconds: 30 # 续约更新时间间隔（默认30秒）
+  client:
+    healthcheck:
+      enabled:  true    # 开启健康检查（需要spring-boot-starter-actuator依赖）
+    register-with-eureka: true
+    registry-fetch-interval-seconds: 30
+    serviceUrl: #注册中心的注册地址
+      defaultZone: http://admin:admin@localhost:8761/eureka/
