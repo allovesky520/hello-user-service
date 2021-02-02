@@ -1,6 +1,3 @@
-server:
-  port: 8522  #服务端口号
-
 spring:
   # 开启 Gateway 服务注册中心服务发现
   cloud:
