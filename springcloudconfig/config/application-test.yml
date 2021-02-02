@@ -42,6 +42,13 @@ spring:
 feign:
   hystrix:
     enabled: true #开启hystrix
+#  compression:
+#    request:
+#      enabled: true # 开启请求压缩
+#      mime-types: text/html,application/xml,application/json # 设置压缩的数据类型
+#      min-request-size: 2048 # 设置触发压缩的大小下限
+#    response:
+#      enabled: true # 开启响应压缩  
 #  okhttp:
 #    enabled: true
 #  httpclient:
@@ -70,7 +77,13 @@ hystrix:
           thread:
             timeoutInMilliseconds: 6000 #断路器超时时间，默认1000ms
           strategy: SEMAPHORE
-
+#请求处理的超时时间
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+#  MaxAutoRetries: 0 # 当前服务器的重试次数
+#  MaxAutoRetriesNextServer: 0 # 重试多少次服务
+#  OkToRetryOnAllOperations: false # 是否对所有的请求方式都重试  
 
 # 更改Eureka更新频率将打破服务器的自我保护功能，生产环境下不建议自定义这些配置。
 eureka:
