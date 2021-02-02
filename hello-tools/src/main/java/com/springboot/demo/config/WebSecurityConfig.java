@@ -57,6 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/login").permitAll()
                 // VIP1的用户可以访问v1下的所有路径
                 .antMatchers("/v1/test/hello").hasRole("VIP1")
+                .antMatchers("/verifyCode/**").permitAll()
                 .anyRequest()// 任何请求,登录后可以访问
                 .authenticated()
         ;
