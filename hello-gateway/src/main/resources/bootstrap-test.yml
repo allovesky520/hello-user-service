@@ -1,3 +1,5 @@
+server:
+  port: 8522  #服务端口号
 spring:
   cloud:
     config:
