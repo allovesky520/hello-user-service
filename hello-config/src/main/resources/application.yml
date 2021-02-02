@@ -7,7 +7,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/allovesky520/hello-service # git仓库的地址
+          uri: https://github.com/allovesky520/hello-user-service # git仓库的地址
           search-paths: springcloudconfig/config  # git仓库地址下的相对地址，可以配置多个，用,分割。
           username: #Git仓库用户名
           password: #Git仓库密码
