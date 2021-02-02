@@ -1,0 +1,33 @@
+server:
+  port: 8522  #服务端口号
+
+spring:
+  # 开启 Gateway 服务注册中心服务发现
+  cloud:
+    gateway:
+#      enabled: true # 默认为true启动网关，如果项目中引用的jar包而不想启用网关，可以改为false
+      discovery:
+        locator:
+          enabled: true # 当访问http://网关地址/服务名称（大写）/**地址会自动转发到http://服务名称（大写）/**地址，如果为false就不会自动转发
+          lowerCaseServiceId: true  # 为true表示服务名称（小写）
+      routes:
+        - id: hello-tools
+          uri: lb://hello-tools # lb 代表从注册中心获取服务
+          predicates: # 断言
+            - Path=/hellos/**
+          filters:
+            - StripPrefix=1 #StripPrefix网关过滤器工厂采用一个参数StripPrefix。 StripPrefix参数表示在将请求发送到下游之前从请求中剥离的路径个数
+#      #全局默认filters:default-filters中 下面的先执行 所以 Retry在下面 Hystrix在上面 (即 先重试在断路)
+      default-filters:
+        - name: Hystrix
+          args:
+            name: fallbackcmd
+            fallbackUri: forward:/defaultfallback
+#        - name: Retry
+#          args:
+#            retries: 3  # 在Eureka注册列表中有一个节点挂掉了，在短时间内，列表没有更新，还会调用挂掉的节点，可以通过失败重试调用其他节点
+#            statuses: BAD_GATEWAY
+#
+#    loadbalancer:
+#      retry:
+#        enabled: true
