@@ -1,25 +1,7 @@
+#spring 基础固定配置
 spring:
-  cloud:
-    config:
-#      uri:  http://localhost:3301/  # 接口直连不走注册中心
-      name: tools  # 获取配置文件的名称
-      profile: dev # 获取配置的策略
-      label: master # 获取配置文件的分支，默认是master。如果是是本地获取的话，则无用。
-      discovery:
-        enabled:  true  # 开启配置信息发现
-        serviceId:  hello-config # 指定配置中心的service-id，便于扩展为高可用配置集群
-
-# 更改Eureka更新频率将打破服务器的自我保护功能，生产环境下不建议自定义这些配置。
-eureka:
-#  instance:
-#    prefer-ip-address: false #使用服务的id地址注册
-#    lease-expiration-duration-in-seconds: 90  # 续约到期时间（默认90秒）
-#    lease-renewal-interval-in-seconds: 30 # 续约更新时间间隔（默认30秒）
-  client:
-#    healthcheck:
-#      enabled:  true    # 开启健康检查（需要spring-boot-starter-actuator依赖）
-#    register-with-eureka: true
-#    registry-fetch-interval-seconds: 30
-    serviceUrl: #注册中心的注册地址
-      defaultZone: http://admin:admin@localhost:8761/eureka/
-
+  #系统环境
+  profiles:
+    active: test
+  application:
+    name: hello-tools #服务名称--调用的时候根据名称来调用该服务的方法
