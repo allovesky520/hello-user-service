@@ -1,0 +1,4 @@
+server:
+  port: 8520  #服务端口号
+
+hello: yyzh-hello-config
