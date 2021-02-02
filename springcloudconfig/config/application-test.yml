@@ -32,10 +32,6 @@ spring:
   jackson:
     serialization:
       indent_output: true
-  application:
-    name: hello-tools #服务名称--调用的时候根据名称来调用该服务的方法
-#  profiles:
-#    active: native
   #去掉重复的metrics
   metrics:
     servo:
@@ -64,16 +60,16 @@ feign:
 #        readTimeout: 100000
 
 #配置hystrix超时
-#hystrix:
-#  command:
-#    default:  #default全局有效，service id指定应用有效
-#      execution:
-#        timeout:
-#          enabled: true
-#        isolation:
-#          thread:
-#            timeoutInMilliseconds: 6000 #断路器超时时间，默认1000ms
-#          strategy: SEMAPHORE
+hystrix:
+  command:
+    default:  #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000 #断路器超时时间，默认1000ms
+          strategy: SEMAPHORE
 
 
 # 更改Eureka更新频率将打破服务器的自我保护功能，生产环境下不建议自定义这些配置。
