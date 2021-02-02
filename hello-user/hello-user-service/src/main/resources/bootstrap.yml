@@ -1,0 +1,7 @@
+#spring 基础固定配置
+spring:
+  #系统环境
+  profiles:
+    active: test
+  application:
+    name: hello-user #服务名称--调用的时候根据名称来调用该服务的方法
