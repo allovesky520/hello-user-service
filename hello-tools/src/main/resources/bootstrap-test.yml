@@ -8,7 +8,47 @@ spring:
       discovery:
         enabled:  true  # 开启配置信息发现
         serviceId:  hello-config # 指定配置中心的service-id，便于扩展为高可用配置集群
+  # 项目通用配置
+  redis:
+    host: localhost
+    port: 6379
+    database: 12
+  datasource:
+    #数据源基本配置
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
 
+    type: com.alibaba.druid.pool.DruidDataSource
+    #数据源其他配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    #配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+#sso配置
+sso:
+#  token:
+#    key: tplhk20200907tplhktplhk
+#    live-time: 9999
+  redis:
+    host: localhost
+    port: 6379
+    database: 12
+    #忘记密码验证码有效期
+    forgot_verify_code_effect_mins: 5
 # 更改Eureka更新频率将打破服务器的自我保护功能，生产环境下不建议自定义这些配置。
 eureka:
 #  instance:
@@ -23,4 +63,12 @@ eureka:
     serviceUrl: #注册中心的注册地址
       defaultZone: http://admin:admin@localhost:8761/eureka/
 
+# MyBatis配置
+#mybatis:
+#  # 搜索指定包别名
+#  typeAliasesPackage: com.springboot.demo.domain.**.entity
+#  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+#  mapperLocations: classpath*:mapper/**/*Mapper.xml
+#  # 加载全局的配置文件
+#  configLocation: classpath:mybatis/mybatis-config.xml
 
