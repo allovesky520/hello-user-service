@@ -1,12 +1,12 @@
 package com.springboot.demo.domin.tools.controller;
 
 import com.springboot.demo.annotation.sysLog.aspect.SysLog;
+import com.springboot.demo.constant.Result;
 import com.springboot.demo.domin.tools.service.VerifyCodeService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -18,9 +18,15 @@ public class VerifyCodeController {
     VerifyCodeService verifyCodeService;
 
     @SysLog("获取图形验证码")
+    @ApiOperation(value = "获取图形验证码")
     @GetMapping(value = "")
-    public void getVerifyCode(){
-        verifyCodeService.getVerifyCode();
+    public void getVerifyCode(@RequestParam(name = "phone", value = "phone") String phone){
+        verifyCodeService.getVerifyCode(phone);
     }
 
+//    @ApiOperation(value = "校验随机验证码")
+//    @PostMapping(value = "/check")
+//    public Result checkVerifyCode(@RequestBody VerifyCode input) {
+//
+//    }
 }
