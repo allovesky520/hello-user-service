@@ -24,6 +24,12 @@ public class HelloSpringBoot {
         return helloService.hello(str);
     }
 
+    @SysLog("redis 测试")
+    @GetMapping(value = "/redis")
+    public String testRedis(@RequestParam("str") String str){
+        return helloService.testRedis(str);
+    }
+
 
 
 }
