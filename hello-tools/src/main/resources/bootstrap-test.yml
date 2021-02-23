@@ -38,6 +38,23 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  jpa:
+    hibernate:
+      #配置级联等级
+      ddl-auto: none # create每次运行都删除原有表创建新表,update不用每次创建新表
+      dialect: org.hibernate.dialect.MySQL5Dialect
+    properties:
+      hibernate:
+        format_sql: false
+        temp:
+          use_jdbc_metadata_defaults: false
+      org:
+        hibernate:
+          envers:
+            default_schema: aud
+            store_data_at_delete: true
+    show-sql: true # 打印SQL语句
+
 #sso配置
 sso:
 #  token:
