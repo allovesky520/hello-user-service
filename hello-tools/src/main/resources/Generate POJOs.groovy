@@ -1,4 +1,3 @@
-package com.springboot.demo.util
 //
 //
 //import com.intellij.database.model.DasTable
